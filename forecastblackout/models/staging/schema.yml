@@ -1,0 +1,67 @@
+version: 2
+
+sources:
+  - name: user_db_boa
+    schema: RAW                     # Adjust if your source table is in a different schema
+    database: USER_DB_BOA          # Optional if already set in your dbt profile
+    tables:
+      - name: outage_data
+        description: "Raw outage data from Snowflake"
+
+  - name: user_db_chipmunk
+    schema: RAW
+    database: USER_DB_CHIPMUNK
+    tables:
+      - name: weather_data
+        description: "Raw weather data from Snowflake"
+
+models:
+  - name: stg_outage_data
+    description: "Staging model for outage data from USER_DB_BOA.RAW.OUTAGE_DATA"
+    columns:
+      - name: INCIDENT_ID
+        description: "Unique identifier for each outage event"
+        tests:
+          - not_null
+          #- unique
+
+      - name: OUTAGE_TYPE
+        description: "Type of the outage (Planned or Unplanned)"
+      - name: START_TIME
+        description: "Outage start timestamp"
+
+  - name: stg_weather_data
+    description: "Staging model for weather data from USER_DB_CHIPMUNK.RAW.WEATHER_DATA"
+    columns:
+      - name: INCIDENT_ID
+        description: "Foreign key to the outage event"
+        tests:
+          - not_null
+
+      - name: TEMPERATURE_C
+        description: "Temperature in Celsius"
+      - name: WINDSPEED_KPH
+        description: "Wind speed in kilometers per hour"
+      - name: PRECIP_MM
+        description: "Precipitation in millimeters"
+      - name: APPARENT_TEMP_C
+        description: "Apparent temperature in Celsius"
+      - name: HUMIDITY_PCT
+        description: "Relative humidity in percent"
+      - name: PRESSURE_HPA
+        description: "Atmospheric pressure in hectopascals"
+
+  - name: int_outage_weather_joined
+    description: "Joined and cleaned dataset of outages and weather conditions"
+    columns:
+      - name: INCIDENT_ID
+        description: "Primary key for joined data"
+        tests:
+          - not_null
+
+      - name: LAT
+        description: "Latitude for the event"
+      - name: LON
+        description: "Longitude for the event"
+      - name: TEMPERATURE_C
+        description: "Current or forecasted temperature at outage location"
