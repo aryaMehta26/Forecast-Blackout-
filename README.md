@@ -34,6 +34,7 @@ See Tableau_exports/ for visual insights (outage trends, forecasts, etc.).
 ✅ Tableau visualization integration
 
 🌱 Future Improvements
+
 Integrate real-time outage data using webhooks or streaming.
 
 Expand dashboard interactivity with parameterized filters.
