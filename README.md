@@ -121,7 +121,7 @@ To run this project locally, you will need Docker, Python, and access to Snowfla
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/puks0618/DW-Project.git](https://github.com/puks0618/DW-Project.git)
+    git clone 
     cd DW-Project
     ```
 
@@ -147,11 +147,9 @@ Our Tableau dashboards provide a multi-faceted view of power outage risks.
 
 **Dashboard 1: Outage Forecast Overview**
 *An executive summary of forecasted outage hours, most affected counties, and the impact of different weather factors.* 
-*(Insert screenshot of Dashboard 1 here)*
 
 **Dashboard 2 & 3: Weather-Outage Correlation**
 *Deep dives into the correlation between specific weather variables (wind speed, temperature, pressure, humidity) and outage occurrences.* 
-*(Insert screenshot of Dashboard 2 or 3 here)*
 
 ---
 
