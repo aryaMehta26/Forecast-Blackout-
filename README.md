@@ -95,3 +95,73 @@ The project is orchestrated by multiple Apache Airflow DAGs that manage the enti
 ---
 
 ## 📁 Repository Structure
+
+├── ETL/                     # Contains Airflow DAGs for ETL processes
+│   ├── outage_dag.py
+│   └── weather_dag.py
+├── ELT/                     # Contains the ELT DAG and dbt project files
+│   ├── elt_dag.py
+│   └── forecastblackout/      # dbt project folder
+│       ├── models/
+│       │   ├── staging/
+│       │   └── intermediate/
+│       ├── dbt_project.yml
+│       └── ...
+├── Forecast/                # Contains the Airflow DAG for forecasting
+│   └── forecast_dag.py
+├── tableau_exports/         # Images of dashboards and architecture diagrams
+└── README.md
+
+
+---
+
+## ⚙️ Setup & Installation
+
+To run this project locally, you will need Docker, Python, and access to Snowflake and an API key for Open-Meteo.
+
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/puks0618/DW-Project.git](https://github.com/puks0618/DW-Project.git)
+    cd DW-Project
+    ```
+
+2.  **Set up environment variables:**
+    - Configure your Snowflake connection details (`SNOWFLAKE_USER`, `SNOWFLAKE_PASSWORD`, etc.).
+    - Set up your Open-Meteo API key if required.
+    - It is recommended to use Airflow's connection and variable management for production use.
+
+3.  **Build and run the Docker containers:**
+    - Ensure Docker Desktop is running.
+    - (Add instructions here if you have a `docker-compose.yml` file, e.g., `docker-compose up -d`).
+
+4.  **Run the dbt models:**
+    - Navigate to the `ELT/forecastblackout` directory.
+    - Run `dbt deps` to install dependencies.
+    - Run `dbt run` to execute the models.
+
+---
+
+## 📊 Dashboard Visualizations
+
+Our Tableau dashboards provide a multi-faceted view of power outage risks.
+
+**Dashboard 1: Outage Forecast Overview**
+*An executive summary of forecasted outage hours, most affected counties, and the impact of different weather factors.* 
+*(Insert screenshot of Dashboard 1 here)*
+
+**Dashboard 2 & 3: Weather-Outage Correlation**
+*Deep dives into the correlation between specific weather variables (wind speed, temperature, pressure, humidity) and outage occurrences.* 
+*(Insert screenshot of Dashboard 2 or 3 here)*
+
+---
+
+## 🚀 Future Work
+
+While this project provides a robust foundation, several enhancements are planned for the future:
+
+- **Machine Learning Models:** Replace the rule-based forecasting with more sophisticated ML models (e.g., LSTM, XGBoost) for higher accuracy.
+- **Alerting System:** Implement an alerting system via Airflow (e.g., Email/SMS) to notify stakeholders of high-risk forecasts.
+- **Granular Location Data:** Incorporate more detailed location data, such as ZIP codes or grid blocks, for more precise forecasts.
+- **Mobile Optimization:** Create mobile-friendly versions of the Tableau dashboards for on-the-go access.
+
+---
